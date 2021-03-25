@@ -5,6 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const postRoutes = require('./routes/posts.js');
 const userRoutes = require('./routes/user.js');
+const news = require('./controllers/news.js');
 
 const app = express();
 dotenv.config();
@@ -16,7 +17,9 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 
-app.get('/', (req, res)=>{
+//news api
+app.get('/news', news);
+app.get('/', (req, res) => {
     res.send('Hello to Impressions API');
 })
 
