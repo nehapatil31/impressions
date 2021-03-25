@@ -5,6 +5,7 @@ import FileBase64 from 'react-file-base64';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
+import Modal from '../modal/Modal';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({
@@ -13,6 +14,8 @@ const Form = ({ currentId, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const [openModal, setOpenModal] = React.useState(false);
+    const [modalText, setModalText] = React.useState('');
 
     const posts = useSelector((state) => state.posts);
     useEffect(() => {
@@ -27,9 +30,12 @@ const Form = ({ currentId, setCurrentId }) => {
 
         if (currentId) {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+            setModalText('Post updated!');
         } else {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
+            setModalText('Post added in the end!!');
         }
+        setOpenModal(true);
         clear();
     }
     const clear = () => {
@@ -53,14 +59,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Impression</Typography>
-                {/* <TextField
-                    name="creator"
-                    variant='outlined'
-                    label="Creator"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                ></TextField> */}
                 <TextField
                     name="title"
                     variant='outlined'
@@ -98,6 +96,9 @@ const Form = ({ currentId, setCurrentId }) => {
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
                 <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
             </form>
+            <Modal openModal={openModal} setOpenModal={setOpenModal} isConfirm={false}>
+                {modalText}
+            </Modal>
         </Paper>
     )
 }
