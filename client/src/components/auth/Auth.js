@@ -7,7 +7,7 @@ import Input from './Input';
 import Icon from './icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signin, signup } from '../../actions/auth';
+import { signin, signup, googleSignin } from '../../actions/auth';
 
 const initialState = {
     firstName: '',
@@ -45,10 +45,12 @@ const Auth = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: 'AUTH', data: { result, token } });
-
-            //redirect to home page
-            history.push('/');
+            // dispatch({ type: 'AUTH', data: { result, token } });
+            const data = {
+                token
+            };
+            dispatch(googleSignin(data, history));
+            
         } catch (error) {
             console.log(error);
         }

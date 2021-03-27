@@ -15,6 +15,8 @@ const auth = async (req, res, next) => {
             //google auth
             decodedData = jwt.decode(token);
             req.userId = decodedData.sub;
+            req.isGoogleSignin = true;
+            req.email = decodedData.email;
         }
 
         next();

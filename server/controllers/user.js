@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
 const signin = async (req, res) => {
     const { email, password } = req.body;
@@ -18,7 +20,7 @@ const signin = async (req, res) => {
         res.status(200).json({ result: existingUser, token });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Something went wrong.' });
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -38,8 +40,30 @@ const signup = async (req, res) => {
         res.status(200).json({ result, token });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Something went wrong.' });
+        res.status(500).json({ message: error.message });
     }
 }
 
-module.exports = { signin, signup };
+const googleSignIn = async (req, res) => {
+    const { token } = req.body
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.CLIENT_ID
+        });
+        const { name, email } = ticket.getPayload();
+
+        let result = await User.findOne({ email });
+        
+        if (!result) {
+            result = await User.create({ email, name });
+        }
+
+        res.status(200).json({ result, token });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = { signin, signup, googleSignIn };

@@ -26,16 +26,29 @@ const saveNews = async (req, res) => {
 
         if (!req.userId) return res.json({ message: 'Unauthenticated' });
 
-        const user = await User.findById(req.userId);
+        let user;
 
-        const index = user.news.findIndex((id) => id === String(newsId));
+        //If user is logged in using Google then find document by email otherwise by id.
+        if (req.isGoogleSignin) {
+            user = await User.find({ 'email': req.email });
+            user = user[0];
+        } else {
+            user = await User.findById(req.userId);
+        }
+
+        const index = user.news ? user.news.findIndex((id) => id === String(newsId)) : -1;
         if (index == -1) {
             user.news.push(newsId)
         } else {
             user.news = user.news.filter((id) => id !== String(newsId));
         }
 
-        const updatedUser = await User.findByIdAndUpdate(req.userId, user, { new: true });
+        let updatedUser;
+        if (req.isGoogleSignin) {
+            updatedUser = await User.findOneAndUpdate({ 'email': req.email }, { 'news': user.news }, { new: true });
+        } else {
+            updatedUser = await User.findByIdAndUpdate(req.userId, user, { new: true });
+        }
 
         res.json({ result: updatedUser });
     } catch (error) {

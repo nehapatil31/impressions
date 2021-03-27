@@ -23,6 +23,7 @@ export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 
 export const signin = (data) => API.post('/user/signin', data);
 export const signup = (data) => API.post('/user/signup', data);
+export const googleSignin = (data) => API.post('/user/google', data);
 
 //News api
 export const fetchNews = () => API.get('/news');
