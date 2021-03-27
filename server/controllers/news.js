@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
 const request = require('request');
+const User = require('../models/user.js');
+const { use } = require('../routes/posts.js');
 
 const newsapi = '4a8f8ef1af1c42899b1878906219d650';
 
@@ -17,4 +20,27 @@ const getNews = async (req, res) => {
     }
 }
 
-module.exports = getNews;
+const saveNews = async (req, res) => {
+    try {
+        const { newsId } = req.params;
+
+        if (!req.userId) return res.json({ message: 'Unauthenticated' });
+
+        const user = await User.findById(req.userId);
+
+        const index = user.news.findIndex((id) => id === String(newsId));
+        if (index == -1) {
+            user.news.push(newsId)
+        } else {
+            user.news = user.news.filter((id) => id !== String(newsId));
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(req.userId, user, { new: true });
+
+        res.json({ result: updatedUser });
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
+module.exports = { getNews, saveNews };

@@ -1,24 +1,24 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const postRoutes = require('./routes/posts.js');
 const userRoutes = require('./routes/user.js');
-const news = require('./controllers/news.js');
+const newsRoutes = require('./routes/news.js');
 
 const app = express();
 dotenv.config();
 
-app.use(bodyParser.json({ limit: "30mb", extented: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extented: true }));
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
+app.use('/news', newsRoutes);
 
-//news api
-app.get('/news', news);
+
 app.get('/', (req, res) => {
     res.send('Hello to Impressions API');
 })

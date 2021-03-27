@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const auth = async (req, res, next) => {
     try {
+        if(!req.headers.authorization) return res.json({"message":"Authorized"})
         const token = req.headers.authorization.split(" ")[1];
         isCustomAuth = token.length < 500;   //to check whether auth is from google or custom auth 
 

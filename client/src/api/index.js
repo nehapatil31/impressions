@@ -26,3 +26,4 @@ export const signup = (data) => API.post('/user/signup', data);
 
 //News api
 export const fetchNews = () => API.get('/news');
+export const bookmarkNews = (title) => API.patch(`/news/${title}`);

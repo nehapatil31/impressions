@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_NEWS, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
 import * as api from '../api';
 
 //Action Creators (action creators are functions that return action and action is just and object that has the type and payload)
@@ -54,13 +54,3 @@ export const likePost = (id) => async (dispatch) => {
 }
 
 
-export const getNews = () => async (dispatch) => {
-    try {
-        const { data } = await api.fetchNews();
-
-        dispatch({ type: FETCH_NEWS, payload: data });
-    } catch (error) {
-        console.log(error);
-    }
-
-}

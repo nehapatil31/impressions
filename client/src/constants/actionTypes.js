@@ -4,6 +4,8 @@ export const DELETE = 'DELETE';
 export const FETCH_ALL = 'FETCH_ALL';
 
 export const FETCH_NEWS = "FETCH_NEWS";
+export const BOOKMARK = "BOOKMARK";
+
 
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
