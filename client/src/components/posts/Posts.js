@@ -13,7 +13,6 @@ const Posts = ({ setCurrentId }) => {
     const [modalCallback, setModalCallback] = React.useState();
 
 
-    console.log(posts);
     return (
         !posts.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems='stretch' spacing={3}>

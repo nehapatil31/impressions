@@ -26,5 +26,5 @@ export const signup = (data) => API.post('/user/signup', data);
 export const googleSignin = (data) => API.post('/user/google', data);
 
 //News api
-export const fetchNews = () => API.get('/news');
+export const fetchNews = (data) => API.post('/news', data);
 export const bookmarkNews = (title) => API.patch(`/news/${title}`);

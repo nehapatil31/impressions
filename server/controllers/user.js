@@ -58,8 +58,9 @@ const googleSignIn = async (req, res) => {
         if (!result) {
             result = await User.create({ email, name });
         }
+        const newToken = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: "1h" });
 
-        res.status(200).json({ result, token });
+        res.status(200).json({ result, token:newToken });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message });

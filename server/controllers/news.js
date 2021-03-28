@@ -6,8 +6,10 @@ const { use } = require('../routes/posts.js');
 const newsapi = '4a8f8ef1af1c42899b1878906219d650';
 
 const getNews = async (req, res) => {
+    const data = req.body;
     try {
-        request.get('https://newsapi.org/v2/everything?q=Apple&from=2021-03-22&sortBy=popularity&apiKey=4a8f8ef1af1c42899b1878906219d650', function (error, response, body) {
+        const category = data.category ? data.category: '';
+        request.get(`https://newsapi.org/v2/top-headlines?country=in&sortBy=popularity&category=${category}&apiKey=4a8f8ef1af1c42899b1878906219d650`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 res.status(200).json(JSON.parse(body));
             }

@@ -15,6 +15,11 @@ export default makeStyles((theme) => ({
     color: '#330055',
     textDecoration: 'none',
   },
+  buttonsGroup:{
+    display: 'inline-flex',
+    verticalAlign: 'middle',
+    alignItems: "center"
+  },
   image: {
     marginLeft: '15px',
   },

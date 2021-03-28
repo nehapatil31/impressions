@@ -1,9 +1,9 @@
 import { FETCH_NEWS, BOOKMARK } from 'constants/actionTypes';
 import * as api from 'api';
 
-export const getNews = () => async (dispatch) => {
+export const getNews = (categoryData) => async (dispatch) => {
     try {
-        const { data } = await api.fetchNews();
+        const { data } = await api.fetchNews(categoryData);
 
         dispatch({ type: FETCH_NEWS, payload: data });
     } catch (error) {

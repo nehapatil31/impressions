@@ -4,7 +4,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/', news.getNews);
+router.post('/', news.getNews);
 router.patch('/:newsId', auth, news.saveNews);
 
 
