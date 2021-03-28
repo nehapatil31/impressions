@@ -4,8 +4,8 @@ import useStyles from './styles';
 import FileBase64 from 'react-file-base64';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { createPost, updatePost } from '../../actions/posts';
-import Modal from '../modal/Modal';
+import { createPost, updatePost } from 'actions/posts';
+import Modal from 'components/modal/Modal';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({

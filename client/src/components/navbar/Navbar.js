@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Avatar, Button, Typography, Toolbar, Grid } from '@material-ui/core';
 import useStyles from './styles';
-import impression from '../../images/impression.png';
+import impression from 'images/impression.png';
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { LOGOUT } from '../../constants/actionTypes';
+import { LOGOUT } from 'constants/actionTypes';
 import decode from 'jwt-decode';
 
 const Navbar = () => {

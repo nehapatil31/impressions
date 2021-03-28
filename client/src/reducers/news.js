@@ -1,4 +1,4 @@
-import { FETCH_NEWS } from '../constants/actionTypes';
+import { FETCH_NEWS } from 'constants/actionTypes';
 
 const newsReducer = (state = { newsData: null }, action) => {
     switch (action.type) {

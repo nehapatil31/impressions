@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { deletePost, likePost } from '../../../actions/posts';
+import { deletePost, likePost } from 'actions/posts';
 
 const Post = ({ post, setCurrentId, setOpenModal, setModalCallback }) => {
     const classes = useStyles();
@@ -29,7 +29,7 @@ const Post = ({ post, setCurrentId, setOpenModal, setModalCallback }) => {
 
     return (
         <Card className={classes.card}>
-            {post.selectedFile && <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />}
+            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
             <div className={classes.overlay}>
                 <Typography variant='h6'>{post.name}</Typography>
                 <Typography variant='body2'>{moment(post.creatorAt).fromNow()}</Typography>

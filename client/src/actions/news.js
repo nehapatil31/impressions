@@ -1,5 +1,5 @@
-import { FETCH_NEWS, BOOKMARK } from '../constants/actionTypes';
-import * as api from '../api';
+import { FETCH_NEWS, BOOKMARK } from 'constants/actionTypes';
+import * as api from 'api';
 
 export const getNews = () => async (dispatch) => {
     try {

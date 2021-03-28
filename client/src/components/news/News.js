@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { getNews, bookmarkNews } from '../../actions/news';
+import { getNews, bookmarkNews } from 'actions/news';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Grid, CircularProgress, Card, CardMedia, CardHeader, IconButton, CardContent, Typography, CardActions, Button } from '@material-ui/core';
 import { BookmarkBorder, Bookmark } from '@material-ui/icons';
 import moment from 'moment';
 import useStyles from './styles';
-import Modal from '../modal/Modal';
+import Modal from 'components/modal/Modal';
 
 const News = () => {
 	const dispatch = useDispatch();

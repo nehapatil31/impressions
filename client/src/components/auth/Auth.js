@@ -7,7 +7,7 @@ import Input from './Input';
 import Icon from './icon';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signin, signup, googleSignin } from '../../actions/auth';
+import { signin, signup, googleSignin } from 'actions/auth';
 
 const initialState = {
     firstName: '',
@@ -41,7 +41,7 @@ const Auth = () => {
     }
 
     const googleSuccess = (res) => {
-        const result = res?.profileObj;
+        // const result = res?.profileObj;
         const token = res?.tokenId;
 
         try {

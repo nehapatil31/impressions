@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Post from './post/Post'
-import Modal from '../modal/Modal';
+import Modal from 'components/modal/Modal';
 import useStyles from './styles';
 import { Grid, CircularProgress } from '@material-ui/core';
 
