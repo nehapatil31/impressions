@@ -8,18 +8,36 @@ import moment from 'moment';
 import useStyles from './styles';
 import Modal from 'components/modal/Modal';
 
-const News = () => {
+const News = ({location}) => {
 	const dispatch = useDispatch();
 	const news = useSelector((state) => state.news);
-	const newsItems = news?.newsData?.articles;
+	// const newsItems = news?.newsData?.articles;
 	const classes = useStyles();
 	const [openModal, setOpenModal] = React.useState(false);
+	const [newsItems, setNewsItems] = React.useState(news?.newsData?.articles);
 	const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
 
 	console.log(news);
 	useEffect(() => {
 		dispatch(getNews());
 	}, [])
+
+	useEffect(() => {
+		if (location?.pathname == '/news') {
+			setNewsItems(news?.newsData?.articles);
+		} else {
+			let filteredNews;
+			if (news.newsData && location?.state?.bookmark && user.result?.news?.length > 0) {
+				filteredNews = news.newsData?.articles.filter(newsItem => {
+					return user.result.news.includes(newsItem.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''));
+				})
+			}
+			if (filteredNews?.length > 0) {
+				setNewsItems(filteredNews);
+			}
+		}
+
+	}, [location, news])
 
 	const handleBookmark = async (title) => {
 		if (!user) {

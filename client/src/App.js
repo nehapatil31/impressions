@@ -16,6 +16,10 @@ const App = () => {
                     <Route path='/' exact component={Home} />
                     <Route path='/auth' exact component={Auth} />
                     <Route path='/news' exact component={News} />
+                    <Route path='/bookmarked-news' exact 
+                        render={(props) => (
+                            <News {...props} />
+                        )} />
                 </Switch>
             </Container>
         </BrowserRouter>

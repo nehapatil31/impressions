@@ -48,9 +48,6 @@ export default makeStyles((theme) => ({
       fontSize: '2.75rem',
       margin: 'auto'
     },
-    image: {
-      display: 'none'
-    },
     signin: {
       margin: 'auto'
     }
